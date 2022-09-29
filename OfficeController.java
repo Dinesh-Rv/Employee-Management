@@ -14,6 +14,7 @@ import com.ideas2it.model.EmployeeProjects;
 import com.ideas2it.enums.EmployeeRole;
 import com.ideas2it.enums.EmployeeGender;
 import com.ideas2it.enums.LeaveType;
+
 import com.ideas2it.exceptions.MoreCharacterException;
 
 import java.util.ArrayList;
@@ -195,7 +196,7 @@ than one characted for main crud choice(Custom exception)
         Employee newEmployeeDetails = new Employee(employeeName, employeeRole, employeeDepartment, employeePhoneNumber,
                                                    employeeDateOfBirth, employeeGender, employeeEmail, employeeId, 
                                                    createdAt, modifiedAt);
-        if(employeeServiceImpl.addEmployee(newEmployeeDetails)) {
+        if(employeeServiceImpl.addEmployee(newEmployeeDetails) != null) {
             System.out.println("Employee Addition Unsuccessfull");
         } else {
             System.out.println("Employee Added succesfully");
@@ -330,8 +331,8 @@ than one characted for main crud choice(Custom exception)
         System.out.println("Enter empid");
         String employeeId = scanner.nextLine();
 
-        if (employeeServiceImpl.deleteEmployee(employeeId)) {
-            System.out.println("Employee Not Found");
+        if (employeeServiceImpl.deleteEmployee(employeeId) != 0) {
+            System.out.println("Employee not found");
         } else {
             System.out.println("Employee Deleted");
         }
@@ -555,12 +556,12 @@ leave records of an employee
         String leaveType = getValidLeaveType().toString();
         String createdAt = currentDateTime();
         String modifiedAt = currentDateTime();
-        LeaveRecords record = new LeaveRecords(employeeId, fromDate, toDate, leaveType, createdAt, modifiedAt);
+        LeaveRecords record = new LeaveRecords(fromDate, toDate, leaveType, createdAt, modifiedAt);
 
-        if(leaveRecordsServiceImpl.addLeaveRecord(record)) {
-            System.out.println("Leave record Unsuccessfull");
-        } else {
+        if(leaveRecordsServiceImpl.addLeaveRecord(record, employeeId).equals(employeeId)) {
             System.out.println("Absense for " + leaveType + " Recorded succesfully");
+        } else {
+            System.out.println("Leave record unsuccesfull");
         }
     }
 

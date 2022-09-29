@@ -10,7 +10,7 @@
             <generator class = "increment"/>
         </id>
 
-        <property name = "employeeId" column = "employee_id" type = "string"/>
+        <property name = "employeeId" column = "employee_id" type = "string" not-null ="true" insert ="false" update ="false"/>
         <property name = "fromDate" column = "from_date" type= "string"/>
         <property name = "toDate" column = "to_date" type= "string"/>
         <property name = "leaveType" column = "leave_type" type= "string"/>

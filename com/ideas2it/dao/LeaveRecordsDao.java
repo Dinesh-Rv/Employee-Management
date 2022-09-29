@@ -22,7 +22,7 @@ public interface LeaveRecordsDao {
      *        contains the details of a record to be inserted to the row  
      * @return number of employees added in database (i.e number of tables affected)                
      */
-    public boolean addLeaveRecord(LeaveRecords record);
+    public String addLeaveRecord(LeaveRecords record, String employeeId);
 
     /**
      * <p>

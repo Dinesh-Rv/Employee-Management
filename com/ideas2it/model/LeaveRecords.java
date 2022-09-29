@@ -20,13 +20,11 @@ public class LeaveRecords {
     public LeaveRecords() {
     }
 
-    public LeaveRecords(String employeeId, 
-                        String fromDate, 
+    public LeaveRecords(String fromDate, 
                         String toDate,
                         String leaveType,
                         String createdAt,
                         String modifiedAt) {
-        this.employeeId = employeeId;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.leaveType = leaveType;

@@ -37,7 +37,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try { 
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            employeeId = (Integer)session.save(employee);
+            employeeId = (String)session.save(employee);
             transact.commit();
         } catch (HibernateException h) {
             System.out.println(h);

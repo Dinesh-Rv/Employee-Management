@@ -22,7 +22,7 @@ from the controller and passes it to the dao addition of employee
 is added succesfully in the database
      *                  
      */ 
-    public boolean addEmployee(Employee employee);
+    public String addEmployee(Employee employee);
 
     /**
      * <p>
@@ -55,7 +55,7 @@ process is successfull
      * @return a boolean to confirm if the employee is deleted successfully
      *
      */
-    public boolean deleteEmployee(String employeeId);
+    public int deleteEmployee(String employeeId);
 
     /**
      * <p>

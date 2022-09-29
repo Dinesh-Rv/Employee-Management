@@ -13,14 +13,14 @@ public interface LeaveRecordsService {
 from the controller for the leave record creation
      * </p>
      *
-     * @param employee
-     *        Details of an employee to be passed to the dao(i.e a new employee)
+     * @param record
+     *        record of an employee leave to be passed to the dao(i.e a new leave record)
      *  
      * @return boolean element to confirm an employee
 is added succesfully in the database
      *                  
      */ 
-    public boolean addLeaveRecord(LeaveRecords leaveRecords);
+    public String addLeaveRecord(LeaveRecords record, String employeeId);
 
 
     /**

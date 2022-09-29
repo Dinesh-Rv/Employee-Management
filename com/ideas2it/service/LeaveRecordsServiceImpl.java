@@ -10,8 +10,8 @@ public class LeaveRecordsServiceImpl implements LeaveRecordsService {
 
     private LeaveRecordsDao leaveRecordsDaoImpl = new LeaveRecordsDaoImpl();
 
-    public boolean addLeaveRecord(LeaveRecords record) {
-        return leaveRecordsDaoImpl.addLeaveRecord(record);
+    public String addLeaveRecord(LeaveRecords record, String employeeId) {
+        return leaveRecordsDaoImpl.addLeaveRecord(record, employeeId);
     }
 
     public List<LeaveRecords> getLeaveRecords(String employeeId) {

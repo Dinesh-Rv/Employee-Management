@@ -27,7 +27,7 @@ public class Employee {
     private String employeeGender;
     private String createdAt;
     private String modifiedAt;
-    private List leaveRecords;
+    private List<LeaveRecords> leaveRecords;
 
     public Employee () {
     }
@@ -176,7 +176,7 @@ public class Employee {
         return modifiedAt;
     } 
 
-    public void setLeaveRecords(List leaveRecords) {
+    public void setLeaveRecords(List<LeaveRecords> leaveRecords) {
         this.leaveRecords = leaveRecords;
     }
 

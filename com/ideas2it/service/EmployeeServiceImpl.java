@@ -12,8 +12,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeDao employeeDaoImpl = new EmployeeDaoImpl();
     
-    public boolean addEmployee(Employee employee) {
-        return employeeDaoImpl.addEmployee(employee);
+    public String addEmployee(Employee employee) {
+        return employeeDaoImpl.insertEmployee(employee);
     }
     
     public List<Employee> getEmployees() {
@@ -24,8 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
          return employeeDaoImpl.updateEmployee(employee);
     }
 
-    public boolean deleteEmployee(String employeeId) {
-	 return employeeDaoImpl.deleteEmployee(employeeId);
+    public int deleteEmployee(String employeeId) {
+	 return employeeDaoImpl.removeEmployee(employeeId);
     }
 
     public Employee getEmployeeById(String employeeId) {

@@ -5,10 +5,12 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name = "dialect"> org.hibernate.dialect.MySQLDialect</property>
-        <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/office</property>
+        <property name = "hibernate.hbm2ddl.auto">update</property>
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name = "show_sql">true</property>
+        <property name = "hibernate.connection.url">jdbc:mysql://localhost/office</property>
         <property name = "hibernate.connection.username">root</property>
-        <property name = "hibernate.connection.password">dineshideas2it</property>
+        <property name = "hibernate.connection.password">dinesh@ideas2it</property>
         <mapping resource = "com/ideas2it/model/employee.hbm.xml"/>
         <mapping resource = "com/ideas2it/model/leaveRecords.hbm.xml"/>
     </session-factory>
