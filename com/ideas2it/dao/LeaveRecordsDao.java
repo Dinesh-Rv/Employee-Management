@@ -1,5 +1,6 @@
 package com.ideas2it.dao;
 import com.ideas2it.model.LeaveRecords;
+import com.ideas2it.model.Employee;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface LeaveRecordsDao {
      *        contains the details of a record to be inserted to the row  
      * @return number of employees added in database (i.e number of tables affected)                
      */
-    public String addLeaveRecord(LeaveRecords record, String employeeId);
+    public int addLeaveRecord(LeaveRecords record);
 
     /**
      * <p>

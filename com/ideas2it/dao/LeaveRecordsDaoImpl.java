@@ -21,29 +21,33 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
-    public String addLeaveRecord(LeaveRecords record, String employeeId) {
-        List <LeaveRecords> leaveRecord = new ArrayList<LeaveRecords>();
-        leaveRecord.add(record);
+    public int addLeaveRecord(LeaveRecords record) {
+        int leaveId = 0;
         Session session = null;
-
         try { 
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            Employee employee = (Employee) session.get(Employee.class, employeeId);
-            employee.setLeaveRecords(leaveRecord);
-            session.save(employee);
+            leaveId = (Integer)session.save(record);
+            System.out.println(leaveId);
             transact.commit();
         } catch (HibernateException h) {
             System.out.println(h);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
         }
-
-        return employeeId;
+        return leaveId;
     }
 
     @Override
     public List<LeaveRecords> getLeaveRecords(String employeeId) {
         List<LeaveRecords> leaveRecords = new ArrayList<LeaveRecords>();
-       
+        /*Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            leaveRecords = session.createQuery("FROM LeaveRecords  AND ")*/
         return leaveRecords;
     }
 

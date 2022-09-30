@@ -1,5 +1,6 @@
 package com.ideas2it.model;
 import com.ideas2it.enums.LeaveType;
+import com.ideas2it.model.Employee;
 
 /**
  * <p> Contains every attribute for leave records for
@@ -10,7 +11,7 @@ an employee, doesn't contain any i/o operation
 public class LeaveRecords {
    
     private int leaveRecordId;
-    private String employeeId;
+    private Employee employee;
     private String fromDate;
     private String toDate;
     private String leaveType;
@@ -20,11 +21,13 @@ public class LeaveRecords {
     public LeaveRecords() {
     }
 
-    public LeaveRecords(String fromDate, 
+    public LeaveRecords(Employee employee,
+                        String fromDate, 
                         String toDate,
                         String leaveType,
                         String createdAt,
                         String modifiedAt) {
+        this.employee = employee;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.leaveType = leaveType;
@@ -33,12 +36,12 @@ public class LeaveRecords {
     }
 
     public LeaveRecords(int leaveRecordId,
-                        String employeeId, 
+                        Employee employee, 
                         String fromDate, 
                         String toDate,
                         String leaveType) {
         this.leaveRecordId = leaveRecordId;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.leaveType = leaveType;
@@ -52,12 +55,12 @@ public class LeaveRecords {
         return leaveRecordId;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public String getEmployeeId() {		
-        return employeeId;
+    public Employee getEmployee() {		
+        return employee;
     } 
 
 
@@ -104,7 +107,6 @@ public class LeaveRecords {
     @Override
     public String toString() {
         return "\nLeave Reference Id :" + leaveRecordId 
-             + "\nLeave for Id : "+ employeeId 
              + "\nLeave Type : " + leaveType 
              + "\nFrom :" + fromDate 
              + "\nTo : "+ toDate + "\n";

@@ -20,7 +20,7 @@ from the controller for the leave record creation
 is added succesfully in the database
      *                  
      */ 
-    public String addLeaveRecord(LeaveRecords record, String employeeId);
+    public int addLeaveRecord(LeaveRecords record);
 
 
     /**

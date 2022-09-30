@@ -10,11 +10,15 @@
             <generator class = "increment"/>
         </id>
 
-        <property name = "employeeId" column = "employee_id" type = "string" not-null ="true" insert ="false" update ="false"/>
         <property name = "fromDate" column = "from_date" type= "string"/>
         <property name = "toDate" column = "to_date" type= "string"/>
         <property name = "leaveType" column = "leave_type" type= "string"/>
         <property name = "createdAt" column = "created_at" type= "string"/>
         <property name = "modifiedAt" column = "modified_at" type= "string"/>
+
+        <many-to-one class="com.ideas2it.model.Employee" name= "employee">
+            <column name = "employee_id" not-null = "true"/>
+        </many-to-one>
+
     </class>
 </hibernate-mapping>
