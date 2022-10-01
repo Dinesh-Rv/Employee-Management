@@ -1,6 +1,7 @@
 package com.ideas2it.service;
 
 import com.ideas2it.model.LeaveRecords;
+import com.ideas2it.model.Employee;
 import com.ideas2it.dao.LeaveRecordsDao;
 import com.ideas2it.dao.LeaveRecordsDaoImpl;
 

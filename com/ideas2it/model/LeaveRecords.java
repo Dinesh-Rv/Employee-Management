@@ -63,7 +63,6 @@ public class LeaveRecords {
         return employee;
     } 
 
-
     public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }

@@ -58,25 +58,17 @@ public class OfficeController {
                 break;
 
             case Constants.READ_ELEMENT:
-                officeController.readEmployee();
+                officeController.readElement();
                 break;	
 
             case Constants.UPDATE_ELEMENT:
-                officeController.updateEmployee(); 
+                officeController.updateElement(); 
                 break;
 
 	    case Constants.DELETE_ELEMENT:
 		officeController.deleteEmployee();
 	   	break;
 
-            case Constants.LEAVE_RECORDS:
-                officeController.leaveRecords();
-                break;
-
-            case Constants.EMPLOYEE_PROJECTS:
-                officeController.employeeProject();
-                break;
-	    
 	    case Constants.EXIT_PROGRAM:
 	        System.out.println("Program terminated succesfully");
 		break crudLoop;
@@ -101,11 +93,9 @@ of create read update and delete
         StringBuilder crudChoice = new StringBuilder("+===+========You wanted to?===============+"
                                                       + "\n| 1 |----to CREATE Elements               |"
                                                       + "\n| 2 |----to READ Elements                 |"
-                                                      + "\n| 3 |----to UPDATE Employee Details       |"
-                                                      + "\n| 4 |----to DELETE Employee Details       |"
-                                                      + "\n| 5 |----to LEAVE RECORDS                 |"
-                                                      + "\n| 6 |----to PROJECT RECORDS               |"
-                                                      + "\n| 7 |----to TERMINATE PROGRAM  !          |"
+                                                      + "\n| 3 |----to UPDATE Elements               |"
+                                                      + "\n| 4 |----to DELETE Elements               |"
+                                                      + "\n| 5 |----to TERMINATE PROGRAM  !          |"
                                                       + "\n+===+=====================================+");
         System.out.println(crudChoice);
         try {
@@ -264,6 +254,8 @@ than one characted for main crud choice(Custom exception)
         }*/
     }   
 
+    
+
     /**
      *<p>
      * Gets the input for the employeeRole and checks if its valid
@@ -354,7 +346,8 @@ than one characted for main crud choice(Custom exception)
         } else if (userChoice.equals(Constants.READ_LEAVE_RECORD)) {
             Employee validEmployee = getValidEmployee();
             if(validEmployee != null) {
-                //System.out.println(leaveRecordsServiceImpl.getLeaveRecords(validEmployee.getEmployeeId());;
+                String employeeId = validEmployee.getEmployeeId();
+                System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employeeId));
             } else 
                 System.out.println("Employee Not Found");
         } else if (userChoice.equals(Constants.READ_EMPLOYEE_PROJECT)) {
@@ -391,6 +384,34 @@ than one characted for main crud choice(Custom exception)
         }
     }
 
+    public void updateElement() {
+        StringBuilder createChoice = new StringBuilder("+===+========You wanted to?===============+"
+                                                      + "\n| 1 |----to UPDATE Employee Details       |"
+                                                      + "\n| 2 |----to UPDATE Leave Records          |"
+                                                      + "\n| 3 |----to UPDATE Employee Projects      |"
+                                                      + "\n|any|----except above choices to go back  |"   
+                                                      + "\n+===+=====================================+");
+        System.out.println(createChoice);
+        String userChoice = scanner.nextLine();
+        if (userChoice.equals(Constants.CREATE_EMPLOYEE)) {
+            updateEmployee();
+        } else if (userChoice.equals(Constants.CREATE_LEAVE_RECORD)) {
+            Employee validEmployee = getValidEmployee();
+            if(validEmployee != null) {
+                updateLeaveRecords(validEmployee);
+            } else 
+                System.out.println("Employee Not Found");
+        } else if (userChoice.equals(Constants.CREATE_EMPLOYEE_PROJECT)) {
+            Employee validEmployee = getValidEmployee();
+            if(validEmployee != null) {
+                updateEmployeeProjects(validEmployee);
+            } else 
+                System.out.println("Employee Not Found");
+        } else {
+            System.out.println("Backing");
+        }
+    }
+
     /**
      * <p>
      * Output statement for showing options for update elements
@@ -410,23 +431,6 @@ than one characted for main crud choice(Custom exception)
                            + "\n| 8 |. To Finish Updating"
                            + "\n=========================================================");
         System.out.println(updateOptions);
-    }
-
-    /**
-     * <p>
-     * deletes an employee
-     * </p>
-     *
-     */ 
-    public void deleteEmployee() {
-        System.out.println("Enter empid");
-        String employeeId = scanner.nextLine();
-
-        if (employeeServiceImpl.deleteEmployee(employeeId) != 0) {
-            System.out.println("Employee not found");
-        } else {
-            System.out.println("Employee Deleted");
-        }
     }
     
     /**
@@ -486,6 +490,101 @@ than one characted for main crud choice(Custom exception)
             }  
 	} else {
             System.out.println("Employee Not Found");
+        }
+    }
+
+    /**
+     * <p>
+     * Updates leave record for employee
+     * </p>
+     *
+     */ 
+    public void updateLeaveRecords(Employee employee) {
+        /*System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employee));
+        System.out.println("Select the Leave id to edit");
+        int userLeaveRecordId = Integer.parseInt(scanner.nextLine()); 
+
+        LeaveRecords leaveRecord = leaveRecordsServiceImpl.getLeaveRecord(employee, userLeaveRecordId);
+        for(;;) {			
+            System.out.println(leaveRecord);
+            leaveRecordsUpdateStatement();
+            int updateElement = Integer.parseInt(scanner.nextLine());
+				
+	    if (updateElement == 1) {	
+                leaveRecord.setFromDate(scanner.nextLine());
+                leaveRecord.setModifiedAt(currentDateTime());
+                    
+            } else if (updateElement == 2)  {
+                leaveRecord.setToDate(getValidLeaveDate()); 
+                leaveRecord.setModifiedAt(currentDateTime());
+
+            } else if (updateElement == 3) {	
+                leaveRecord.setLeaveType(getValidLeaveType().toString());
+                leaveRecord.setModifiedAt(currentDateTime());
+                    
+            } else if (updateElement == 4) {
+                leaveRecordsServiceImpl.updateLeaveRecords(leaveRecord);
+                break;
+            } else if (updateElement == 5) {
+                break;
+            }
+        } */ 
+    }
+
+    /**
+     * <p>
+     * Updates employee project
+     * </p>
+     *
+     */ 
+    public void updateEmployeeProjects(Employee employee) {
+        /*EmployeeProjects employeeProjects = employeeProjectsServiceImpl.getEmployeeProject(employee); 
+    
+        for(;;) {			
+            System.out.println(employeeProjects);
+            leaveRecordsUpdateStatement();
+            int updateElement = scanner.nextInt();
+				
+	    if (updateElement == 1) {	
+                employeeProjects.setProjectName(scanner.nextLine());
+                employeeProjects.setModifiedAt(currentDateTime());
+                employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
+
+	    } else if (updateElement == 2)  {
+                employeeProjects.setProjectManager(scanner.nextLine()); 
+                employeeProjects.setModifiedAt(currentDateTime());
+                employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
+
+            } else if (updateElement == 3) {	
+                employeeProjects.setClientName(scanner.nextLine());
+                employeeProjects.setModifiedAt(currentDateTime());
+                employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
+
+            } else if (updateElement == 4) {	
+                employeeProjects.setStartDate(scanner.nextLine());
+                employeeProjects.setModifiedAt(currentDateTime());
+                employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
+
+            } else {
+                System.out.println("Backing");
+            }
+        }*/ 
+    }    
+
+    /**
+     * <p>
+     * deletes an employee
+     * </p>
+     *
+     */ 
+    public void deleteEmployee() {
+        System.out.println("Enter empid");
+        String employeeId = scanner.nextLine();
+
+        if (employeeServiceImpl.deleteEmployee(employeeId) != 0) {
+            System.out.println("Employee not found");
+        } else {
+            System.out.println("Employee Deleted");
         }
     }
 
@@ -605,81 +704,6 @@ them updated
     }
 
     /**
-     * <p>
-     * asks the user to create or read corresponding
-leave records of an employee
-     * </p>
-     *
-     */ 
-    public void leaveRecords() {
-        Employee employee = getValidEmployee();
-
-        if(employee != null) {
-            StringBuilder leaveRecord = new StringBuilder("+===+========You wanted to?===============+"
-                                                          + "\n| 1 |----to CREATE Leave Records          |"
-                                                          + "\n| 2 |----to READ Leave Records            |"
-                                                          + "\n| 3 |----to UPDATE Leave Records          |"
-                                                          + "\n+===+=====================================+");
-            System.out.println(leaveRecord);
-            int userChoice = Integer.parseInt(scanner.nextLine());
-            switch(userChoice) {
-            case 1:
-                createLeaveRecords(employee);
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                //updateLeaveRecords(employeeId);
-                break;
-            default:
-                //System.out.println("Backing");
-            }
-        } else {
-            System.out.println("The employee id doesnt matches any employee");
-        }
-    }
-
-
-    /**
-     * <p>
-     * Updates leave record for employee
-     * </p>
-     *
-     */ 
-    public void updateLeaveRecords(String employeeId) {
-        System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employeeId));
-        System.out.println("Select the Leave id to edit");
-        int userLeaveRecordId = Integer.parseInt(scanner.nextLine()); 
-
-        LeaveRecords leaveRecord = leaveRecordsServiceImpl.getLeaveRecord(employeeId, userLeaveRecordId);
-        for(;;) {			
-            System.out.println(leaveRecord);
-            leaveRecordsUpdateStatement();
-            int updateElement = Integer.parseInt(scanner.nextLine());
-				
-	    if (updateElement == 1) {	
-                leaveRecord.setFromDate(scanner.nextLine());
-                leaveRecord.setModifiedAt(currentDateTime());
-                    
-            } else if (updateElement == 2)  {
-                leaveRecord.setToDate(getValidLeaveDate()); 
-                leaveRecord.setModifiedAt(currentDateTime());
-
-            } else if (updateElement == 3) {	
-                leaveRecord.setLeaveType(getValidLeaveType().toString());
-                leaveRecord.setModifiedAt(currentDateTime());
-                    
-            } else if (updateElement == 4) {
-                leaveRecordsServiceImpl.updateLeaveRecords(leaveRecord);
-                break;
-            } else if (updateElement == 5) {
-                break;
-            }
-        }  
-    }
-
-    /**
      *<p>
      * output statement for leave records update
      *</p>
@@ -736,84 +760,6 @@ leave records of an employee
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return localDateTime.format(dateTime);
-    }
-
-    /**
-     * <p>
-     * asks the user to create, read or update corresponding
-projects of an employee
-     * </p>
-     *
-     */
-    public void employeeProject() {
-        System.out.println("Enter employe id");
-	String employeeId = scanner.nextLine();
-
-        if(isEmployeeValid(employeeId)) {
-            StringBuilder projectRecord = new StringBuilder("+===+========You wanted to?===============+"
-                                                          + "\n| 1 |----to CREATE employee Project       |"
-                                                          + "\n| 2 |----to READ employee Project         |"
-                                                          + "\n| 3 |----to UPDATE employee Project       |"
-                                                          + "\n+===+=====================================+");
-            System.out.println(projectRecord);
-            int userChoice = Integer.parseInt(scanner.nextLine());
-            switch(userChoice) {
-            case 1:
-                //createEmployeeProject(employeeId);
-                break;
-            case 2:
-                //System.out.println(employeeProjectsServiceImpl.getEmployeeProject(employeeId));
-                break;
-            case 3:
-                updateEmployeeProjects(employeeId);
-                break;
-            default:
-                System.out.println("Backing");
-            }
-        } else {
-            System.out.println("The employee id doesnt matches any employee");
-        }
-    }
-
-
-    /**
-     * <p>
-     * Updates employee project
-     * </p>
-     *
-     */ 
-    public void updateEmployeeProjects(String employeeId) {
-            EmployeeProjects employeeProjects = employeeProjectsServiceImpl.getEmployeeProject(employeeId); 
-    
-            for(;;) {			
-                System.out.println(employeeProjects);
-		leaveRecordsUpdateStatement();
-                int updateElement = scanner.nextInt();
-				
-	        if (updateElement == 1) {	
-                    employeeProjects.setProjectName(scanner.nextLine());
-                    employeeProjects.setModifiedAt(currentDateTime());
-                    employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
-
-		} else if (updateElement == 2)  {
-                    employeeProjects.setProjectManager(scanner.nextLine()); 
-                    employeeProjects.setModifiedAt(currentDateTime());
-                    employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
-
-                } else if (updateElement == 3) {	
-                    employeeProjects.setClientName(scanner.nextLine());
-                    employeeProjects.setModifiedAt(currentDateTime());
-                    employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
-
-                } else if (updateElement == 4) {	
-                    employeeProjects.setStartDate(scanner.nextLine());
-                    employeeProjects.setModifiedAt(currentDateTime());
-                    employeeProjectsServiceImpl.updateEmployeeProjects(employeeProjects);
-
-                } else {
-                    System.out.println("Backing");
-                }
-            }  
     }
 
      /**
