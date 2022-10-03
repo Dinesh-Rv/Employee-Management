@@ -33,7 +33,7 @@ is added succesfully in the database
      * @return Details of leave reports of an employee
      *
      */
-    public List<LeaveRecords> getLeaveRecords(String employeeId);
+    public List<LeaveRecords> getLeaveRecords(Employee employee);
 
     /**
      * <p>

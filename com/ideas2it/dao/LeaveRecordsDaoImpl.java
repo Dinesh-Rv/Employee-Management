@@ -10,8 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction; 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.HibernateException;
-
-import javax.persistence.Query;  
+import org.hibernate.Query;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -41,15 +40,19 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
     }
 
     @Override
-    public List<LeaveRecords> getLeaveRecords(String employeeId) {
+    public List<LeaveRecords> getLeaveRecords(Employee employee) {
         List<LeaveRecords> leaveRecords = new ArrayList<LeaveRecords>();
         Session session = null;
         try {
+            System.out.println(employee.getEmployeeId());
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            Query query = session.createQuery("FROM LeaveRecords WHERE DELETED = 0 AND employeeId = :employeeId");
-            query.setParameter("employeeId", employeeId);
-            leaveRecords = query.getResultList();
+            System.out.println("before create query");
+            Query query = session.createQuery("FROM LeaveRecords WHERE DELETED = 0 AND employee = :employee");
+            System.out.println("after create query");
+            query.setParameter("employee", employee.getEmployeeId());
+            System.out.println("after set param");
+            leaveRecords = query.list();
             transact.commit();
         } catch (HibernateException h) {
             System.out.println(h);

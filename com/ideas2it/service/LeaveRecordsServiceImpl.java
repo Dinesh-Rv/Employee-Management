@@ -16,8 +16,8 @@ public class LeaveRecordsServiceImpl implements LeaveRecordsService {
         return leaveRecordsDaoImpl.addLeaveRecord(record);
     }
 
-    public List<LeaveRecords> getLeaveRecords(String employeeId) {
-        return leaveRecordsDaoImpl.getLeaveRecords(employeeId);
+    public List<LeaveRecords> getLeaveRecords(Employee employee) {
+        return leaveRecordsDaoImpl.getLeaveRecords(employee);
     }
 
     public boolean updateLeaveRecords(LeaveRecords leaveRecords) {

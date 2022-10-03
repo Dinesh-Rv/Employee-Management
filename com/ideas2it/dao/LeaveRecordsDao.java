@@ -32,7 +32,7 @@ public interface LeaveRecordsDao {
      *
      * @return the details of a employee                  
      */
-    public List<LeaveRecords> getLeaveRecords(String employeeId);
+    public List<LeaveRecords> getLeaveRecords(Employee employee);
 
     /**
      * <p>

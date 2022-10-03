@@ -346,8 +346,9 @@ than one characted for main crud choice(Custom exception)
         } else if (userChoice.equals(Constants.READ_LEAVE_RECORD)) {
             Employee validEmployee = getValidEmployee();
             if(validEmployee != null) {
-                String employeeId = validEmployee.getEmployeeId();
-                System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employeeId));
+                //Employee employee = validEmployee;
+                System.out.println(validEmployee.getLeaveRecords());
+                //System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employee));
             } else 
                 System.out.println("Employee Not Found");
         } else if (userChoice.equals(Constants.READ_EMPLOYEE_PROJECT)) {
