@@ -44,10 +44,8 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
         List<LeaveRecords> leaveRecords = new ArrayList<LeaveRecords>();
         Session session = null;
         try {
-            System.out.println(employee.getEmployeeId());
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            System.out.println("before create query");
             Query query = session.createQuery("FROM LeaveRecords WHERE DELETED = 0 AND employee = :employee");
             System.out.println("after create query");
             query.setParameter("employee", employee.getEmployeeId());
@@ -66,13 +64,39 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
 
     @Override
     public boolean updateLeaveRecords(LeaveRecords leaveRecords) {
-        return true;
-    }
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            System.out.println(leaveRecords);
+            session.update(leaveRecords);
+            transact.commit();
+            return true;
+        } catch (HibernateException h) {
+            System.out.println(h);
+        } finally {
+            if(session != null) {
+                session.close();
+            }          
+        }
+        return false;
+    } 
 
     @Override
-    public LeaveRecords getLeaveRecord(String employeeId, int userLeaveRecordId) {
+    public LeaveRecords getLeaveRecordById(int userLeaveRecordId) {
         LeaveRecords leaveRecord = null;
-        
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            leaveRecord = (LeaveRecords) session.get(LeaveRecords.class, userLeaveRecordId);
+        } catch (HibernateException h) {
+            System.out.println(h);
+        } finally {
+            if(session != null) {
+                session.close();
+            }          
+        }
         return leaveRecord;
     }
 }

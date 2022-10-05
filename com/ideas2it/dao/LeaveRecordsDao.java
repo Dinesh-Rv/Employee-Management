@@ -50,6 +50,6 @@ public interface LeaveRecordsDao {
      *
      * @return the details of all trainees                    
      */
-    public LeaveRecords getLeaveRecord(String employeeId, int userLeaveRecordId);
+    public LeaveRecords getLeaveRecordById(int userLeaveRecordId);
 
 }

@@ -24,7 +24,7 @@ public class LeaveRecordsServiceImpl implements LeaveRecordsService {
          return leaveRecordsDaoImpl.updateLeaveRecords(leaveRecords);
     }
 
-    public LeaveRecords getLeaveRecord(String employeeId, int leaveRecordId) {
-        return leaveRecordsDaoImpl.getLeaveRecord(employeeId, leaveRecordId);
+    public LeaveRecords getLeaveRecordById(int userLeaveRecordId) {
+        return leaveRecordsDaoImpl.getLeaveRecordById(userLeaveRecordId);
     }
 }

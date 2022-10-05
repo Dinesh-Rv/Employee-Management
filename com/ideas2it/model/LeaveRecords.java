@@ -87,7 +87,7 @@ public class LeaveRecords {
         return leaveType;
     }
 
-    public void setCreatedAt(String entryAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

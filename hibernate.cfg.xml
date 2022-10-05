@@ -11,6 +11,7 @@
         <property name = "hibernate.connection.url">jdbc:mysql://localhost/office</property>
         <property name = "hibernate.connection.username">root</property>
         <property name = "hibernate.connection.password">dinesh@ideas2it</property>
+        <property name = "hibernate.enable_lazy_load_no_trans">true</property>
         <mapping resource = "com/ideas2it/model/employee.hbm.xml"/>
         <mapping resource = "com/ideas2it/model/leaveRecords.hbm.xml"/>
     </session-factory>

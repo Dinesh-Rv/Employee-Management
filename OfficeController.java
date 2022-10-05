@@ -46,11 +46,9 @@ public class OfficeController {
     private Scanner scanner = new Scanner(System.in);
 
     public static void main(String [] args) {	
-        
         OfficeController officeController = new OfficeController();		
-
         crudLoop:
-        for(;;) { 	
+        while(true) { 	
             String crudChoice = officeController.crudOperation();
             switch (crudChoice) {
             case Constants.CREATE_ELEMENT: 												
@@ -91,11 +89,15 @@ of create read update and delete
     private String crudOperation() {
         String userCrudChoice = null;
         StringBuilder crudChoice = new StringBuilder("+===+========You wanted to?===============+"
-                                                      + "\n| 1 |----to CREATE Elements               |"
-                                                      + "\n| 2 |----to READ Elements                 |"
-                                                      + "\n| 3 |----to UPDATE Elements               |"
-                                                      + "\n| 4 |----to DELETE Elements               |"
-                                                      + "\n| 5 |----to TERMINATE PROGRAM  !          |"
+                                                      + "\n| 1 |       CREATE Elements               |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 2 |        READ Elements                |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 3 |       UPDATE Elements               |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 4 |       DELETE Elements               |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 5 |   TERMINATE PROGRAM  ! Caution      |"
                                                       + "\n+===+=====================================+");
         System.out.println(crudChoice);
         try {
@@ -127,11 +129,14 @@ than one characted for main crud choice(Custom exception)
 
     public void createElement() {
         StringBuilder createChoice = new StringBuilder("+===+========You wanted to?===============+"
-                                                      + "\n| 1 |----to CREATE Employee Details       |"
-                                                      + "\n| 2 |----to CREATE Leave Records          |"
-                                                      + "\n| 3 |----to CREATE Employee Projects      |"
-                                                      + "\n|any|----except above choices to go back  |"   
-                                                      + "\n+===+=====================================+");
+                                                      + "\n| 1 |    CREATE Employee Details       |"
+                                                      + "\n+===+==================================+"
+                                                      + "\n| 2 |    CREATE Leave Records          |"
+                                                      + "\n+===+==================================+"
+                                                      + "\n| 3 |   CREATE Employee Projects       |"
+                                                      + "\n+===+==================================+"
+                                                      + "\n|any|    except above to go back       |"   
+                                                      + "\n+===+==================================+");
         System.out.println(createChoice);
         String userChoice = scanner.nextLine();
         if (userChoice.equals(Constants.CREATE_EMPLOYEE)) {
@@ -295,11 +300,13 @@ than one characted for main crud choice(Custom exception)
         EmployeeGender gender;     
         for(;;) {
             StringBuilder genderChoice = new StringBuilder();
-	    genderChoice.append("=============Enter Employee Gender================="
-                              + "\n1 Male"
-                              + "\n2 Female"
-                              + "\n3 Undefined"
-                              + "\n==============================");
+	    genderChoice.append("+===+==Enter Employee Gender==+"
+                              + "\n| 1 |          Male           |"
+                              + "\n+===+=========================+"
+                              + "\n| 2 |         Female          |"
+                              + "\n+===+=========================+"
+                              + "\n| 3 |       Undefined         |"
+                              + "\n==============================+");
             System.out.println(genderChoice);
             int userChoice = Integer.parseInt(scanner.nextLine());
             EmployeeGender employeeGender = EmployeeGender.getEmployeeGender(userChoice);
@@ -335,24 +342,26 @@ than one characted for main crud choice(Custom exception)
     public void readElement() {
         StringBuilder readChoice = new StringBuilder("+===+========You wanted to?===============+"
                                                       + "\n| 1 |----to READ Employee Details         |"
+                                                      + "\n+===+=====================================+"
                                                       + "\n| 2 |----to READ Leave Records            |"
+                                                      + "\n+===+=====================================+"
                                                       + "\n| 3 |----to READ Employee Projects        |"
+                                                      + "\n+===+=====================================+"
                                                       + "\n|any|----except above choices to go back  |"   
                                                       + "\n+===+=====================================+");
         System.out.println(readChoice);
         String userChoice = scanner.nextLine();
+        Employee validEmployee = null;
         if (userChoice.equals(Constants.READ_EMPLOYEE)) {
             readEmployee();
         } else if (userChoice.equals(Constants.READ_LEAVE_RECORD)) {
-            Employee validEmployee = getValidEmployee();
+            validEmployee = getValidEmployee();
             if(validEmployee != null) {
-                //Employee employee = validEmployee;
                 System.out.println(validEmployee.getLeaveRecords());
-                //System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employee));
             } else 
                 System.out.println("Employee Not Found");
         } else if (userChoice.equals(Constants.READ_EMPLOYEE_PROJECT)) {
-            Employee validEmployee = getValidEmployee();
+            validEmployee = getValidEmployee();
             if(validEmployee != null) {
                 //System.out.println(employeeProjectsServiceImpl.getEmployeeProject(validEmployee.getEmployeeId()));
             } else 
@@ -370,11 +379,13 @@ than one characted for main crud choice(Custom exception)
      */
     private void readEmployee() {
         StringBuilder readOptions = new StringBuilder();
-        readOptions.append("+===+===============READ EMPLOYEE DETAILS============+"
-                         + "\n| 1 |-----to print All Employee Details              |" 
-                         + "\n| 2 |-----To search Employee Details using id        |"
-                         + "\n|any|-----except above choices to go back            |"
-                         + "\n+===+================================================+");
+        readOptions.append("+===+=========READ EMPLOYEE DETAILS============+"
+                         + "\n| 1 |      Print All Employee Details        |" 
+                         + "\n+===+========================================+"
+                         + "\n| 2 |     Get Employee Details using id      |"
+                         + "\n+===+========================================+"
+                         + "\n|any|    except above choices to go back     |"
+                         + "\n+===+========================================+");
         System.out.println(readOptions);
         String readChoice = scanner.nextLine();
     
@@ -387,30 +398,33 @@ than one characted for main crud choice(Custom exception)
 
     public void updateElement() {
         StringBuilder createChoice = new StringBuilder("+===+========You wanted to?===============+"
-                                                      + "\n| 1 |----to UPDATE Employee Details       |"
-                                                      + "\n| 2 |----to UPDATE Leave Records          |"
-                                                      + "\n| 3 |----to UPDATE Employee Projects      |"
-                                                      + "\n|any|----except above choices to go back  |"   
+                                                      + "\n| 1 |       UPDATE Employee Details       |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 2 |       UPDATE Leave Records          |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n| 3 |       UPDATE Employee Projects      |"
+                                                      + "\n+===+=====================================+"
+                                                      + "\n|any|  except above choices to go back    |"   
                                                       + "\n+===+=====================================+");
         System.out.println(createChoice);
         String userChoice = scanner.nextLine();
-        if (userChoice.equals(Constants.CREATE_EMPLOYEE)) {
-            updateEmployee();
-        } else if (userChoice.equals(Constants.CREATE_LEAVE_RECORD)) {
-            Employee validEmployee = getValidEmployee();
-            if(validEmployee != null) {
+        Employee validEmployee = getValidEmployee();
+        if(validEmployee != null) {
+            switch(userChoice) {
+            case Constants.CREATE_EMPLOYEE:
+                updateEmployee(validEmployee);
+                break;
+            case Constants.CREATE_LEAVE_RECORD: 
                 updateLeaveRecords(validEmployee);
-            } else 
-                System.out.println("Employee Not Found");
-        } else if (userChoice.equals(Constants.CREATE_EMPLOYEE_PROJECT)) {
-            Employee validEmployee = getValidEmployee();
-            if(validEmployee != null) {
+                break;
+            case Constants.CREATE_EMPLOYEE_PROJECT:
                 updateEmployeeProjects(validEmployee);
-            } else 
-                System.out.println("Employee Not Found");
-        } else {
-            System.out.println("Backing");
-        }
+                break;
+            default: 
+                System.out.println("Choice isn't valid");
+            }
+        } else 
+            System.out.println("Employee Not Found");
     }
 
     /**
@@ -421,16 +435,25 @@ than one characted for main crud choice(Custom exception)
      */
     private void updateStatement() {
         StringBuilder updateOptions = new StringBuilder();
-	updateOptions.append("====================UPDATE ELEMENTS========================="
-                           + "\n| 1 |.To Update Employee Name"
-                           + "\n| 2 |.To Update Employee Phone Number"
-                           + "\n| 3 |.To Update Employee Department"
-                           + "\n| 4 |.To Update Employee Date Of Birth"
-                           + "\n| 5 |.To Update Employee Email"
-                           + "\n| 6 |. To update Employee Role"
-                           + "\n| 7 |. To Update Employee Gender"
-                           + "\n| 8 |. To Finish Updating"
-                           + "\n=========================================================");
+	updateOptions.append("+===+=========UPDATE ELEMENTS=============+"
+                           + "\n| 1 |. To Update Employee Name            |"
+                           + "\n+===+=====================================+"
+                           + "\n| 2 |. To Update Employee Phone Number    |"
+                           + "\n+===+=====================================+"
+                           + "\n| 3 |. To Update Employee Department      |"
+                           + "\n+===+=====================================+"
+                           + "\n| 4 |. To Update Employee Date Of Birth   |"
+                           + "\n+===+=====================================+"
+                           + "\n| 5 |. To Update Employee Email           |"
+                           + "\n+===+=====================================+"
+                           + "\n| 6 |. To update Employee Role            |"
+                           + "\n+===+=====================================+"
+                           + "\n| 7 |. To Update Employee Gender          |"
+                           + "\n+===+=====================================+"
+                           + "\n| 8 |. To Save & Exit                     |"
+                           + "\n+===+====================================+"
+                           + "\n|any|. To Exit without saving ! CAUTION   |"
+                           + "\n+===+=====================================+");
         System.out.println(updateOptions);
     }
     
@@ -440,15 +463,9 @@ than one characted for main crud choice(Custom exception)
      * </p>
      *
      */ 
-    public void updateEmployee() {
-        System.out.println("Enter employe id");
-	String employeeId = scanner.nextLine(); 
-
-	if (isEmployeeValid(employeeId)) {  
-            Employee employee = employeeServiceImpl.getEmployeeById(employeeId); 
-    
-            for(;;) {			
-                System.out.println("UPDATE PORTAL FOR EMPLOYEE ID: " + employeeId);
+    public void updateEmployee(Employee employee) {
+    for(;;) {			
+                System.out.println("UPDATE PORTAL FOR EMPLOYEE ID: " + employee.getEmployeeId());
                 System.out.println(employee);
 		updateStatement();
                 String updateElement = scanner.nextLine();
@@ -486,12 +503,28 @@ than one characted for main crud choice(Custom exception)
                     break;     
 
                 } else {
-                    System.out.println("Backing");
+                    System.out.println("Exited without saving");
+                    break;
                 }
             }  
-	} else {
-            System.out.println("Employee Not Found");
-        }
+    }
+
+    /**
+     *<p>
+     * output statement for leave records update
+     *</p>
+     *
+     */
+    public void leaveRecordsUpdateStatement() {
+        StringBuilder updateOptions = new StringBuilder();
+	updateOptions.append("+===+===UPDATE ELEMENTS=======+"
+                           + "\n| 1 |    Update From Date     |"
+                           + "\n| 2 |    Update Till Date     |"
+                           + "\n| 3 |    Update Leave Type    |"
+                           + "\n| 4 |     Save and Exit       |"
+                           + "\n| 5 |   Exit without Saving   |"
+                           + "\n+===+=========================+");
+        System.out.println(updateOptions);
     }
 
     /**
@@ -501,35 +534,38 @@ than one characted for main crud choice(Custom exception)
      *
      */ 
     public void updateLeaveRecords(Employee employee) {
-        /*System.out.println(leaveRecordsServiceImpl.getLeaveRecords(employee));
-        System.out.println("Select the Leave id to edit");
+        System.out.println(employee.getLeaveRecords());
         int userLeaveRecordId = Integer.parseInt(scanner.nextLine()); 
+        LeaveRecords leaveRecord = leaveRecordsServiceImpl.getLeaveRecordById(userLeaveRecordId);
 
-        LeaveRecords leaveRecord = leaveRecordsServiceImpl.getLeaveRecord(employee, userLeaveRecordId);
-        for(;;) {			
-            System.out.println(leaveRecord);
-            leaveRecordsUpdateStatement();
-            int updateElement = Integer.parseInt(scanner.nextLine());
+        if(leaveRecord != null) {
+            for(;;) {			
+                System.out.println(leaveRecord);
+                leaveRecordsUpdateStatement();
+                int updateElement = Integer.parseInt(scanner.nextLine());
 				
-	    if (updateElement == 1) {	
-                leaveRecord.setFromDate(scanner.nextLine());
-                leaveRecord.setModifiedAt(currentDateTime());
-                    
-            } else if (updateElement == 2)  {
-                leaveRecord.setToDate(getValidLeaveDate()); 
-                leaveRecord.setModifiedAt(currentDateTime());
+	        if (updateElement == 1) {	
+                    leaveRecord.setFromDate(scanner.nextLine());
+                    leaveRecord.setModifiedAt(currentDateTime());
+                
+                } else if (updateElement == 2)  {
+                    leaveRecord.setToDate(getValidLeaveDate()); 
+                    leaveRecord.setModifiedAt(currentDateTime());
 
-            } else if (updateElement == 3) {	
-                leaveRecord.setLeaveType(getValidLeaveType().toString());
-                leaveRecord.setModifiedAt(currentDateTime());
+                } else if (updateElement == 3) {	
+                    leaveRecord.setLeaveType(getValidLeaveType().toString());
+                    leaveRecord.setModifiedAt(currentDateTime());
                     
-            } else if (updateElement == 4) {
-                leaveRecordsServiceImpl.updateLeaveRecords(leaveRecord);
-                break;
-            } else if (updateElement == 5) {
-                break;
+                } else  if (updateElement == 4) {
+                    if (leaveRecordsServiceImpl.updateLeaveRecords(leaveRecord)) {
+                        System.out.println("Update is successfull");
+                    }
+                    break;
+                } else if (updateElement == 5) {
+                    break;
+                }
             }
-        } */ 
+        }
     }
 
     /**
@@ -692,34 +728,6 @@ them updated
     public String editEmail() {
         System.out.println("Change Email to?");  
         return getValidEmail();
-    }
-
-    /**
-     * <p>
-     * Gets all employee Details and prints it
-     * </p>
-     *
-     */ 
-    public void displayTraineeDetails() {
-        System.out.println(employeeServiceImpl.getEmployees());
-    }
-
-    /**
-     *<p>
-     * output statement for leave records update
-     *</p>
-     *
-     */
-    public void leaveRecordsUpdateStatement() {
-        StringBuilder updateOptions = new StringBuilder();
-	updateOptions.append("====================UPDATE ELEMENTS========================="
-                           + "\n1.To Update From Date"
-                           + "\n2.To Update Till Date"
-                           + "\n3.To Update Leave Type"
-                           + "\n4.Save and Exit"
-                           + "\n5.Exit without Saving"
-                           + "\n=========================================================");
-        System.out.println(updateOptions);
     }
 
     /**

@@ -57,6 +57,6 @@ the leave record id
      *        the updated elements of a leave Record
      * @return selected leave record
      */
-    public LeaveRecords getLeaveRecord(String employeeId, int leaveRecordId);
+    public LeaveRecords getLeaveRecordById(int userLeaveRecordId);
 
 }

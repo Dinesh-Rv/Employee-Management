@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-    
 
     @Override
     public String insertEmployee(Employee employee) {
