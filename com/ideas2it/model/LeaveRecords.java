@@ -18,6 +18,8 @@ public class LeaveRecords {
     private String createdAt;
     private String modifiedAt;
 
+    private int deleted;
+
     public LeaveRecords() {
     }
 
@@ -101,6 +103,15 @@ public class LeaveRecords {
 
     public String getModifiedAt() {
         return modifiedAt;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
+
+    public int getDeleted() {
+        return deleted;
     }
 
     @Override

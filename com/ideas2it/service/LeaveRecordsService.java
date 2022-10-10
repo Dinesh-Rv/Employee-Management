@@ -28,7 +28,7 @@ is added succesfully in the database
      * <p>
      * Gets leave records for an specific employee
      * </p>
-     * @param employeeId
+     * @param employee
      *        contains an employee Id for comparing
      * @return Details of leave reports of an employee
      *
@@ -40,7 +40,7 @@ is added succesfully in the database
      * passes the updated details to the dao
      * </p>
      *
-     * @param employee
+     * @param leaveRecords
      *        the updated elements of a leave Record
      * @return a false boolean value if the update
 process is successfull
@@ -53,10 +53,11 @@ process is successfull
 the leave record id
      * </p>
      *
-     * @param employee
+     * @param userLeaveRecordId
      *        the updated elements of a leave Record
      * @return selected leave record
      */
     public LeaveRecords getLeaveRecordById(int userLeaveRecordId);
 
+    public void removeEmployeeLeaveRecords(Employee employee);
 }

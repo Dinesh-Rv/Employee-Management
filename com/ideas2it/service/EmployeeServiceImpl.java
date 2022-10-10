@@ -4,6 +4,9 @@ import com.ideas2it.service.EmployeeService;
 import com.ideas2it.model.Employee;
 import com.ideas2it.dao.EmployeeDao;
 import com.ideas2it.dao.EmployeeDaoImpl;
+import com.ideas2it.service.LeaveRecordsService;
+import com.ideas2it.service.LeaveRecordsServiceImpl;
+import com.ideas2it.service.EmployeeProjectsServiceImpl;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 public class EmployeeServiceImpl implements EmployeeService {	
 
     EmployeeDao employeeDaoImpl = new EmployeeDaoImpl();
+    LeaveRecordsService leaveRecordServiceImpl = new LeaveRecordsServiceImpl();
     
     public String addEmployee(Employee employee) {
         return employeeDaoImpl.insertEmployee(employee);
@@ -24,8 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
          return employeeDaoImpl.updateEmployee(employee);
     }
 
-    public int deleteEmployee(String employeeId) {
-	 return employeeDaoImpl.removeEmployee(employeeId);
+    public int removeEmployee(Employee employee) {
+         leaveRecordServiceImpl.removeEmployeeLeaveRecords(employee);
+         System.out.println("After remove rec");
+         //employeeProjectsImpl.removeAllEmployeeProjects(employee);
+	 //int removeEmployeeRecord = employeeDaoImpl.removeEmployee(employee.getEmployeeId());
+         
+         return 1; //removeEmployeeRecord;
     }
 
     public Employee getEmployeeById(String employeeId) {

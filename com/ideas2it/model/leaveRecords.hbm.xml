@@ -4,9 +4,9 @@
                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package ="com.ideas2it.model">
-    <class name="com.ideas2it.model.LeaveRecords" table="leave_records">
+    <class name="LeaveRecords" table="leave_records">
 
-        <id name="leaveRecordId" column = "id" type="int" >
+        <id name="leaveRecordId" column = "id" type="integer" >
             <generator class = "increment"/>
         </id>
 
@@ -15,8 +15,9 @@
         <property name = "leaveType" column = "leave_type" type= "string"/>
         <property name = "createdAt" column = "created_at" type= "string"/>
         <property name = "modifiedAt" column = "modified_at" type= "string"/>
+        <property name="deleted" column="deleted" type="integer"/>
 
-        <many-to-one class="com.ideas2it.model.Employee" name= "employee">
+        <many-to-one class="Employee" name= "employee">
             <column name = "employee_id" not-null = "true"/>
         </many-to-one>
 

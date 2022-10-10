@@ -2,9 +2,6 @@ package com.ideas2it.dao;
 
 import com.ideas2it.dao.EmployeeDao;
 import com.ideas2it.model.Employee;
-import com.ideas2it.enums.EmployeeRole;
-import com.ideas2it.enums.EmployeeGender;
-import com.ideas2it.connection.ConnectorInfo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

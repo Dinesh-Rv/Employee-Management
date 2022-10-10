@@ -9,9 +9,9 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * </p> Contains every attribute common for all employee, doesn't contain
+ * <p> Contains every attribute common for all employee, doesn't contain
  * any input or output operations
- * <p>
+ * </p>
  *
  */
 public class Employee {
@@ -27,7 +27,11 @@ public class Employee {
     private String employeeGender;
     private String createdAt;
     private String modifiedAt;
+
+    private int deleted;
     private List<LeaveRecords> leaveRecords;
+
+    private List<EmployeeProjects> employeeProjects;
 
     public Employee () {
     }
@@ -119,7 +123,7 @@ public class Employee {
         this.employeeEmail = employeeEmail;
     }  
 
-    public String getEmployeeEmail() {		
+    public String getEmployeeEmail() {
         return employeeEmail;
     }  
 
@@ -158,13 +162,13 @@ public class Employee {
 
     public String getEmployeeGender() {		
         return employeeGender;
-    } 
+    }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getCreatedAt() {		
+    public String getCreatedAt() {
         return createdAt;
     }
 
@@ -176,14 +180,29 @@ public class Employee {
         return modifiedAt;
     } 
 
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
     public void setLeaveRecords(List<LeaveRecords> leaveRecords) {
         this.leaveRecords = leaveRecords;
     }
-
-    public List getLeaveRecords() {
+    public List<LeaveRecords> getLeaveRecords() {
         return leaveRecords;
     }
 
+    public void setEmployeeProjects(List<EmployeeProjects> employeeProjects) {
+        this.employeeProjects = employeeProjects;
+    }
+
+    public List<EmployeeProjects> getEmployeeProjects() {
+        return employeeProjects;
+    }
     @Override
     public String toString() {
         String displayEmployeeDetail = "\nEmployee Id : "+ employeeId + "\nEmployee Role : " + employeeRole + 

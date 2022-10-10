@@ -1,5 +1,8 @@
 package com.ideas2it.model;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * <p> Contains every attribute for project record for
 an employee, doesn't contain any i/o operation
@@ -7,7 +10,7 @@ an employee, doesn't contain any i/o operation
  *
  */
 public class EmployeeProjects {
-   
+    private int projectId;
     private String employeeId;
     private String projectName;
     private String projectManager;
@@ -16,14 +19,28 @@ public class EmployeeProjects {
     private String createdAt;
     private String modifiedAt;
 
-    public EmployeeProjects(String employeeId, 
-                            String projectName, 
+    private List<Employee> employee;
+
+    private int deleted;
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
+
+    public  EmployeeProjects() {
+
+    }
+
+    public EmployeeProjects(String projectName,
                             String projectManager,
                             String clientName,
                             String startDate,
                             String createdAt,
                             String modifiedAt) {
-        this.employeeId = employeeId;
         this.projectName = projectName;
         this.projectManager = projectManager;
         this.clientName = clientName;
@@ -32,23 +49,19 @@ public class EmployeeProjects {
         this.modifiedAt = modifiedAt;
     }
 
-    public EmployeeProjects(String employeeId, 
-                            String projectName, 
-                            String projectManager,
-                            String clientName,
-                            String startDate) {
-        this.employeeId = employeeId;
-        this.projectName = projectName;
-        this.projectManager = projectManager;
-        this.clientName = clientName;
-        this.startDate = startDate;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public int getProjectId() {
+        return projectId;
     }
 
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getEmployeeId() {		
+    public String getEmployeeId() {
         return employeeId;
     } 
 
@@ -101,11 +114,18 @@ public class EmployeeProjects {
         return modifiedAt;
     }
 
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
 
     @Override
     public String toString() {
-        return "\nEmployeeId : "+ employeeId + "\nProject Name : " + projectName + 
+        return "\nProject Id : "+ projectId + "\nProject Name : " + projectName +
                "\nProject Manager :" + projectManager + "\nClient Name : "+ clientName + 
                "\n Starting date : " + startDate + "\n";
-    }	
+    }
 }

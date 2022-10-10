@@ -27,7 +27,6 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
             leaveId = (Integer)session.save(record);
-            System.out.println(leaveId);
             transact.commit();
         } catch (HibernateException h) {
             System.out.println(h);
@@ -46,10 +45,8 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
         try {
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            Query query = session.createQuery("FROM LeaveRecords WHERE DELETED = 0 AND employee = :employee");
-            System.out.println("after create query");
+            Query query = session.createQuery("FROM LeaveRecords WHERE deleted = 0 AND employee = :employee");
             query.setParameter("employee", employee.getEmployeeId());
-            System.out.println("after set param");
             leaveRecords = query.list();
             transact.commit();
         } catch (HibernateException h) {
@@ -68,7 +65,6 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
         try {
             session = sessionFactory.openSession();
             Transaction transact = session.beginTransaction();
-            System.out.println(leaveRecords);
             session.update(leaveRecords);
             transact.commit();
             return true;
@@ -98,5 +94,22 @@ public class LeaveRecordsDaoImpl implements LeaveRecordsDao {
             }          
         }
         return leaveRecord;
+    }
+
+    public void removeEmployeeLeaveRecords(Employee employee) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            Query query = session.createQuery("UPDATE LeaveRecords set deleted= 1 WHERE employee = :employee");
+            query.setParameter("employee", employee.getEmployeeId());
+            transact.commit();
+        } catch (HibernateException h) {
+            System.out.println(h);
+        } finally {
+            if(session != null) {
+                session.close();
+            }          
+        }
     }
 }

@@ -52,4 +52,15 @@ public interface LeaveRecordsDao {
      */
     public LeaveRecords getLeaveRecordById(int userLeaveRecordId);
 
+    /**
+     * <p>
+     * Removes all leave records of an employee
+     * </p>
+     *
+     * @param employee
+     *        contains an employee object
+     * @return 
+     */
+     public void removeEmployeeLeaveRecords(Employee employee);
+
 }

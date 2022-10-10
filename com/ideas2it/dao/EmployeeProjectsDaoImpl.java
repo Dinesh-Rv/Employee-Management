@@ -1,83 +1,72 @@
 package com.ideas2it.dao;
 
-import com.ideas2it.model.EmployeeProjects;
-import com.ideas2it.connection.ConnectorInfo;
-
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet; 
-import java.sql.SQLException;
-   
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import com.ideas2it.model.Employee;
+import com.ideas2it.model.EmployeeProjects;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.Query;
 
 
 public class EmployeeProjectsDaoImpl implements EmployeeProjectsDao {
-    Connection connection;
-
+    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
     @Override
-    public boolean addEmployeeProject(EmployeeProjects record) {
+    public boolean addEmployeeProject(EmployeeProjects record, Employee employee) {
+        List<Employee> employees = new ArrayList<Employee>();
+        Session session = null;
         try {
-            connection = ConnectorInfo.createConnection();
-            String insertElementQuery = " INSERT INTO employee_projects (employee_id, name, manager, client, start_date, createdAt, modifiedAt)"
-                                                                      + "VALUES('"+record.getEmployeeId()+"',"
-                                                                      + "'"+record.getProjectName()+"',"
-                                                                      + "'"+record.getProjectManager()+"',"
-                                                                      + "'"+record.getClientName()+"',"
-                                                                      + "'"+record.getStartDate()+"',"
-                                                                      + "'"+record.getCreatedAt()+"',"
-                                                                      + "'"+record.getModifiedAt()+"')";
-            Statement statement = connection.createStatement();
-            return statement.execute(insertElementQuery);
-        } catch (SQLException sqlException) {
-            System.out.println(sqlException);
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            employees.add(employee);
+            record.setEmployee(employees);
+            System.out.println(session.save(record));
+            transact.commit();
+            return true;
+        } catch (HibernateException h) {
+            System.out.println(h);
         } finally {
-            ConnectorInfo.closeConnection();
+            if(session != null) {
+                session.close();
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
-    public EmployeeProjects getEmployeeProject(String employeeId) {
-        EmployeeProjects employeeProject = null;
-        
+    public List<EmployeeProjects> getEmployeeProject(String employeeId) {
+        List<EmployeeProjects> employeeProject = new ArrayList<EmployeeProjects>();
+        Session session = null;
+        int recordNumber = 0;
         try {
-            connection = ConnectorInfo.createConnection();
-            String insertElementQuery = " SELECT * FROM employee_projects WHERE employee_id= '"+employeeId+"'";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(insertElementQuery);
-            while(resultSet.next()) {
-                employeeProject = new EmployeeProjects(resultSet.getString("employee_id"),
-                                                       resultSet.getString("name"), 
-                                                       resultSet.getString("manager"),
-                                                       resultSet.getString("client"),
-                                                       resultSet.getString("start_date"));
-            }
-        } catch (SQLException sqlException) {
-            System.out.println(sqlException);
+            session = sessionFactory.openSession();
+            Transaction transact = session.beginTransaction();
+            Query query = session.createQuery("SELECT EmployeeProjects.projectId, EmployeeProjects.projectName, EmployeeProjects.projectManager, EmployeeProjects.clientName, Employee.employeeId, Employee.employeeName, Employee.employeeRole " +
+                    "                   FROM EmployeeProjects" +
+                    " LEFT JOIN employee_projects" +
+                    "                   ON EmployeeProjects.projectId = employee_projects.project_id" +
+                    "                       AND employee_projects.employee_id = :employeeId" +
+                    "         LEFT JOIN Employee" +
+                    "                   ON employee_projects.employee_id = Employee.employeeId");
+            query.setParameter("employeeId", employeeId);
+            employeeProject = query.list();
+            transact.commit();
+        } catch (HibernateException h) {
+            System.out.println(h);
         } finally {
-            ConnectorInfo.closeConnection();
+            if(session != null) {
+                session.close();
+            }
         }
         return employeeProject;
     }
 
     @Override
-    public boolean updateEmployeeProjects(EmployeeProjects employeeProjects) {
-         try {
-            connection = ConnectorInfo.createConnection();
-            String insertElementQuery = " UPDATE employee_projects SET name ='"+employeeProjects.getProjectName()+"',"
-                                                                    + "manager ='"+employeeProjects.getProjectManager()+"',"
-                                                                    + "client ='"+employeeProjects.getClientName()+"',"
-                                                                    + "start_date ='"+employeeProjects.getStartDate()+"',"
-                                                                    + "modifiedAt ='"+employeeProjects.getModifiedAt()+"'"
-                                                                    + "WHERE employee_id ='"+employeeProjects.getEmployeeId()+"'";
-            Statement statement = connection.createStatement();
-            return statement.execute(insertElementQuery);
-        } catch (SQLException sqlException) {
-            System.out.println(sqlException);
-        } finally {
-            ConnectorInfo.closeConnection();
-        }
+    public boolean updateEmployeeProjects(EmployeeProjects projects) {
+
         return true;
     }
 }

@@ -4,9 +4,11 @@
                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package ="com.ideas2it.model">
-    <class name="com.ideas2it.model.Employee" table="employee">
 
-        <id name="employeeId" column = "id" type="string"/>    
+    <class name="Employee" table="employee">
+        <id name="employeeId" column = "employee_id" type="string">
+                <generator class="assigned"/>
+        </id>
 
         <property name = "employeeName" column = "name" type = "string"/>
         <property name = "employeeDepartment" column = "department" type= "string"/>
@@ -17,10 +19,16 @@
         <property name = "employeeGender" column = "gender" type= "string"/>
         <property name = "createdAt" column = "created_at" type= "string"/>
         <property name = "modifiedAt" column= "modified_at" type= "string"/>
+        <property name = "deleted" column="deleted" type="int"/>
 
         <bag name = "leaveRecords" cascade = "all">
             <key column = "employee_id"/>
-            <one-to-many class="com.ideas2it.model.LeaveRecords"/>
+            <one-to-many class="LeaveRecords"/>
+        </bag>
+
+        <bag name = "employeeProjects" table="employee_projects" cascade = "all">
+            <key column = "employee_id"/>
+            <many-to-many class="EmployeeProjects" column = "project_id"/>
         </bag>
     </class>
 </hibernate-mapping>

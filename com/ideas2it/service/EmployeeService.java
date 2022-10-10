@@ -49,13 +49,13 @@ process is successfull
      * <p>
      * Deletes an employee
      * <p>
-     * @param employeeId
-     *        contains an employee Id for comparing
+     * @param employee
+     *        contains an employee Object
      *
      * @return a boolean to confirm if the employee is deleted successfully
      *
      */
-    public int deleteEmployee(String employeeId);
+    public int removeEmployee(Employee employee);
 
     /**
      * <p>

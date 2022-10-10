@@ -2,7 +2,6 @@ package com.ideas2it.dao;
 import com.ideas2it.model.Employee;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * EmployeeDao.java
@@ -67,7 +66,7 @@ public interface EmployeeDao {
      * Gets the last employee id in the database 
      * </p>
      *
-     * @return the last id created                  
+     * @return the last id created
      */
     public String getEmployeeId();
 }
